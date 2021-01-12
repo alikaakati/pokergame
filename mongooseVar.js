@@ -1,0 +1,1 @@
+export const connectionPass = 'MebaQgQZZeXIn3GC';
