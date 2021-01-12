@@ -4,7 +4,7 @@
   "description": "Poker server for the new project",
   "main": "server.js",
   "scripts": {
-    "start": "nodemon sever.js"
+    "start": "node test.js"
   },
   "author": "Ali kaakati",
   "license": "ISC",
