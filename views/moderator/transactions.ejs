@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('links'); -%>
+    <link rel="stylesheet" href="/css/moderator/transactions.css">
+</head>
+<body>
+    
+    <%- include('header'); -%>
+    <div class="fullContainer">
+        
+        <%- include('sidebar'); -%>
+            <div class="mainContainer">
+                <div class="mainContainerDiv">
+                    <div class="div">
+
+                    <table id="table_id"  class="display compact cell-border hover" >
+                        <thead>
+                            <tr>
+                                <td>Time</td>
+                                <td>From</td>
+                                <td>To</td>
+                                <td>Amount</td>
+                                <td>Currency</td>
+                                <td>Note</td>
+                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i=0; i < transactions.length; i++) { %>
+                                <tr id="<%= transactions[i].Name %>">
+                                    <!-- DATE AND TIME -->                 
+                                    <td>
+                                        
+
+                                        <% if(transactions[i].time.getDate() < 10){ %>
+                                            <%= '0' + transactions[i].time.getDate()%>
+                                            <% } %>
+                                            <% if(transactions[i].time.getDate() >= 10){%>
+                                                <%=transactions[i].time.getDate()%>
+                                            <% } %>/                                            
+                                            <% if(transactions[i].time.getMonth() < 10){ %>
+                                                <%= '0' + parseInt(transactions[i].time.getMonth() + 1) %>
+                                            <% } %>
+                                            <% if(transactions[i].time.getMonth() >= 10){ %>
+                                                <%=parseInt(transactions[i].time.getMonth() + 1) %>
+                                            <% } %>/
+
+                                            <%= transactions[i].time.getFullYear() %> -  
+                                            <%= transactions[i].time.toLocaleTimeString() %>
+
+
+
+                                    </td>
+                                  <td><%= transactions[i].From %></td>
+                                  <td><%= transactions[i].To %></td>
+                                  <td><%= transactions[i].Amount %></td>
+                                  <td><%= transactions[i].Currency %></td>
+                                  <td><%= transactions[i].Note  %></td>
+                                </tr>
+                                <% } %>
+                        </tbody>    
+                    </table>
+                    
+                </div>
+
+                </div>
+            </div>
+    </div>
+
+
+    <script>
+        document.getElementById('3').classList.add('currentPage');
+
+        showSettings = () =>{
+            if(document.getElementById('settings').classList == 'hidden'){
+                document.getElementById('settings').classList.remove('hidden');
+
+                document.getElementById('settings').classList.add('settings');
+
+            }
+            else{
+                document.getElementById('settings').classList.remove('settings');
+                document.getElementById('settings').classList.add('hidden');
+
+            }
+            
+        }
+    </script>
+<script>
+    $(document).ready(function(){
+        var table = $('#table_id').DataTable({
+            "order" : [[0,"desc"]],
+            "scrollY":        "200px",
+            "scrollCollapse": true,
+            "paging":         false,
+            "bInfo": false
+        });
+        
+    })
+
+</script>
+
+
+
+
+
+</body>
+</html>

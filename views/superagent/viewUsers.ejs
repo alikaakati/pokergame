@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <link rel="stylesheet" href="/css/superagent/viewAgents.css">
+        <%- include('links'); -%>
+    </head>
+<body>
+    
+    <%- include('header'); -%>
+    <div class="fullContainer">
+        
+        <%- include('sidebar'); -%>
+            <div class="mainContainer">
+
+                <div class="mainContainerDiv">
+                    <div class="div">
+                        <% if(users.length > 0){ %>
+                        <table id="table_id" class="display  hover" >
+                            <thead>
+                                <tr>
+                                    <td>Date</td>
+                                    <td>Username</td>
+                                    <td>Refferal</td>
+                                    <td>Super Refferal</td>
+                                    <td>Level</td>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i=0; i < users.length; i++) { %>
+                                    <tr id="<%= users[i].username %>">
+                                        <td>
+                                            <% if(users[i].time.getDate() < 10){ %>
+                                             <%= '0' + users[i].time.getDate() %>
+                                            <% } %>
+                                            <% if(users[i].time.getDate() >= 10){%>
+                                                <%=users[i].time.getDate() %>
+                                            <% } %>/
+                                            
+                                            <% if(users[i].time.getMonth() < 10){ %>
+                                                <%= '0' + parseInt(users[i].time.getMonth() + 1)  %>
+                                               <% } %>
+                                               <% if(users[i].time.getMonth() >= 10){ %>
+                                                   <%=parseInt(users[i].time.getMonth() + 1)  %>
+                                               <% } %>/
+   
+                                            <%= users[i].time.getFullYear() %> -  
+                                            <%= users[i].time.toLocaleTimeString() %>
+                                        </td>
+                                    <td><%= users[i].username %></td>
+                                    <td><%= users[i].refferal %></td>
+                                    <td><%= users[i].superRefferal %></td>
+                                    <td><%= users[i].level %></td>
+                                    
+
+                                    
+                                    </tr>
+                                <% } %>
+                                
+                        
+                        
+                            </tbody>
+                        </table>
+                        <% }else{ %>
+                        
+                            <h3>You dont have players that refer to you</h3>
+                        
+                        <% } %>
+                    </div>
+   
+                </div>
+
+            </div>
+    </div>
+
+
+    <script>
+        document.getElementById('4').classList.add('currentPage');
+        showSettings = () =>{
+            if(document.getElementById('settings').classList == 'hidden'){
+                document.getElementById('settings').classList.remove('hidden');
+
+                document.getElementById('settings').classList.add('settings');
+
+            }
+            else{
+                document.getElementById('settings').classList.remove('settings');
+                document.getElementById('settings').classList.add('hidden');
+                
+            }
+            
+        }
+        </script>
+
+        <script>
+                   addUser = () => {
+        
+                    let username = document.getElementById('username').value;
+                    let password = document.getElementById('password').value;
+                    let funds = document.getElementById('funds').value;
+                    
+                    let tempData = {
+                        username : username,
+                        password : password,
+                        funds : funds,
+                    
+                    };
+                    $.ajax({
+                    type:'post',
+                    url:'../api/registerUser',
+                    data:JSON.stringify(tempData),
+                    contentType: "application/json; charset=utf-8",
+                    success:function(resp){
+                            if(resp.added == 'added User successfully !'){
+                                window.location.href = './viewAgents';
+                            }
+                            else{
+                                alert(resp.error);
+                            }
+                    }
+                });
+        
+                
+                
+                
+                
+                
+            }
+        </script>
+
+
+
+<script>
+$(document).ready(function(){
+    var table = $('#table_id').DataTable({
+        "order" : [[0,"desc"]],
+        "scrollY":        "200px",
+        "scrollCollapse": true,
+        "paging":         false,
+        "bInfo": false,
+        "language": {
+            "search": "Filter records:"
+        }
+    });
+    
+})
+
+</script>
+
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+    
+ -->

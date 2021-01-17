@@ -1,0 +1,135 @@
+.mainContainer{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.mainContainerDiv{
+    position: absolute;
+    top: 10px;
+    width: 97%;
+    height: 85%;
+    background-color: white;
+    border-top: 3px solid #d2d6de;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);   
+}
+
+
+
+.firstRow{
+    width: 100%;
+    height: 30%;
+    position: relative;
+}
+
+.firstRowLeft{
+    position: absolute;
+    left: 5px;
+    top: 5px;
+    width: 15%;
+    height: 60%;
+}
+.firstRowLeft > p{
+    font-size: 12px;
+    color: #444;
+}
+
+.firstRowRight{
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    width: 30%;
+    height: 80%;
+    display: flex;
+    flex-direction: row;
+    border-bottom: 1px solid #444;
+    border-top: 1px solid #444;
+    border-right: 1px solid #444;
+    
+
+
+}
+
+
+
+
+.firstRowRightImageContainer{
+    width: 40%;
+    height: 100%;
+}
+.firstRowRightImageContainer > img{
+    width: 100%;
+    height: 100%;
+}
+
+
+.firstRowRightInfoContainer{
+    width: 60%;
+    height: 100%;
+    margin-left: 5px;
+
+}
+
+
+.firstRowRightInfoContainer > .title{
+
+    font-size: 12px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    font-weight: 500;
+
+
+}
+
+
+.firstRowRightInfoContainer > .info{
+
+    font-size: 16px;
+    font-weight: 600;
+    
+}
+
+
+
+
+
+.secondRow{
+    width: 100%;
+    height: 100%;
+    padding-top: 15px;
+    border-top: 2px solid whitesmoke;
+}
+.secondRow > * {
+
+    display: block;
+    margin-left: 15px;
+    margin-bottom: 5px;
+    padding: 2px;
+
+}
+.secondRow > select {
+    width: 30%;
+
+
+
+}
+.secondRow > input {
+    width: 70%;
+    padding-left: 3px;
+    font-size: 12px;
+}
+.buttonContainer > *{
+    border: 0px;
+    padding: 10px;
+    font-size: 12px;
+    color: white;
+
+}
+.buttonContainer > :nth-child(2){
+
+    background-color:#007bff !important;
+}
+.buttonContainer > :nth-child(1){
+    background-color: #28a745!important;
+
+}

@@ -1,0 +1,63 @@
+
+.mainContainer{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.mainContainerDiv{
+    position: absolute;
+    top: 10px;
+    width: 97%;
+    height: 85%;
+    border-radius: 3px;
+    padding-top: 15px;
+    padding-left: 10px; 
+    box-sizing: border-box;
+}
+.card{
+    
+    width: 40%;
+    height: 100px;
+    margin-left: 35px;
+    margin-bottom: 100px;
+    float: left;
+    background-color: white;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);  
+}
+.cardImageContainer{
+    width: 45%;
+    height: 100%;
+    float: left;
+    background-color: rgba(0,0,0,0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.cardTextContainer{
+    width: 55%;
+    height: 100%;
+}
+.money{
+    width: 80%;
+    height: 80%;
+
+}
+.profile{
+    width: 100%;
+    height: 100%;
+}
+.cardTextContainer > *{
+
+    padding-top: 3px;
+    padding-left: 5px;
+
+}
+.firstp{
+    font-size: 23px;
+    color: #4b646f;
+}
+.secondp{
+    font-size: 20px;
+    font-weight: bolder;
+    color: black;
+}

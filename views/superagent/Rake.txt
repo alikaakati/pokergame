@@ -1,0 +1,8 @@
+How the money will work
+Lets say we have 3 users A B C
+Each one has 100 usd in their accounts
+ali is their direct agent
+and hadi is the superagent ( the person who created ali's account)
+lets say that A won all the money so now he has 300k - 3% of 300k which are equal to 291k
+Ali has 300k 
+Ali has to pay A 260k

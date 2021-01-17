@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('links'); -%>
+
+    <link rel="stylesheet" href="/css/moderator/addSuperAgent.css">
+
+</head>
+<body>
+    <%- include('header'); -%>
+    <div class="fullContainer">
+        <%- include('sidebar'); -%>
+
+            <div class="mainContainer">
+                <h5 id='errormsg'></h5>
+                <div class="mainContainerDiv">
+                    <div class="row">
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username" placeholder="Username..">
+
+                    </div>
+                    <div class="row">
+                        <label for="password">Password</label>
+                        <input type="password" name="password" id="password" placeholder="Password..">
+                    </div>
+                    <div class="row">
+                        <label for="fundsUSD">USD Funds</label>
+                        <input type="number" name="fundsUSD" id="fundsUSD" placeholder="USD Funds..">
+                    </div>
+                    <div class="row">
+                        <label for="fundsLBP">LBP Funds</label>
+                        <input type="number" name="fundsLBP" id="fundsLBP" placeholder="LBP Funds..">
+                    </div>
+                    <div class="row">
+                        <label for="rake">Rake</label>
+                        <input type="number" name="rake" id="rake" placeholder="USD Funds..">
+                    </div>
+                    <div class="row">
+                        <label for="phone">Phone</label>
+                        <input type="text" name="phone" id="phone" placeholder="Phone number..">
+                    </div>
+                    <div class="row">
+                        <label for="isSuspended"> Suspended?</label>
+                        <input type="checkbox" name="isSuspended" id="isSuspended" placeholder="Suspended?" style="display: inline;">
+
+                    </div>
+                    
+                    <div class="row">
+                        <button onclick="addSuperAgent()">
+                            Add super agent
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+    </div>
+
+
+    <script>
+
+        document.getElementById('9').classList.add('currentPage');
+
+        addSuperAgent = () =>{
+            
+            let errormsg = document.getElementById('errormsg');
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            let fundsLBP = document.getElementById('fundsLBP').value;
+            let fundsUSD = document.getElementById('fundsUSD').value;
+            let rake = document.getElementById('rake').value;
+            let phone = document.getElementById('phone').value;
+            let isSuspended = document.getElementById('isSuspended').checked;
+            if(username == '' || password == '' || fundsLBP == '' || fundsUSD == '' || rake == '') document.getElementById('errormsg').textContent = 'Please fill in all required fields';
+            
+            else{
+                document.getElementById('errormsg').textContent = '';
+                let tempData = {username , password , fundsLBP , fundsUSD , rake , phone , isSuspended};
+                $.ajax({
+                type:'post',
+                url:'/api/registerSuperAgent',
+                data:JSON.stringify(tempData),
+                contentType: "application/json; charset=utf-8",
+                success:function(data){
+                    console.log(data);
+                }
+                });
+            }
+        }
+        showSettings = () =>{
+            if(document.getElementById('settings').classList == 'hidden'){
+                document.getElementById('settings').classList.remove('hidden');
+                alert('working');
+
+                document.getElementById('settings').classList.add('settings');
+
+            }
+            else{
+                document.getElementById('settings').classList.remove('settings');
+                document.getElementById('settings').classList.add('hidden');
+
+            }
+            
+        }
+    </script>
+
+
+
+
+</body>
+</html>

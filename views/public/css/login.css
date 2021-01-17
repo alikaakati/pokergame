@@ -1,0 +1,98 @@
+*{
+    margin: 0px;
+    padding: 0px;
+;
+}
+
+.modal{
+    display: hidden;
+}
+
+.modal.show{
+    background-color:rgba(0,0,0,0.8);
+    width: 30vw;
+    height: 20vw;
+    padding: 2vw;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    top: calc(50vh - 10vw);
+    left: calc(50vw - 15vw);
+}
+.modal.show>h1{
+    color: white;
+}
+.modal.show>button{
+
+    background-color: red;
+    color: white;
+    width: 5vw;
+    height: 5vh;
+    border: 0px;
+
+}
+
+.modalcontainer{
+    width: 20vw;
+    height: 20vh;
+}
+
+
+.form{
+    width: 100vw;
+    
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.form>button{
+    background-color: goldenrod;
+    color: white;
+    font-size: 15px;
+
+}
+.form>div>input , .form>button{
+    width: 20vw;
+}
+
+
+.form>input{
+    padding: 15px;
+}
+
+#loading.show{
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0,0,0,0.6);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+}
+#loading{
+    display: none;
+}
+
+.loader {
+    border: 16px solid #f3f3f3; /* Light grey */
+    border-top: 16px solid goldenrod; /* Blue */
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 1s linear infinite;
+    position: fixed;
+    top: calc(50vh - 60px);
+    left: calc(50vw - 60px);
+  }
+  
+  @keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

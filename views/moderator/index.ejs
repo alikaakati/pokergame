@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('links'); -%>
+    <link rel="stylesheet" href="/css/moderator/index.css">
+</head>
+<body>
+    
+    <%- include('header'); -%>
+    
+    <div class="fullContainer">
+        
+        <%- include('sidebar'); -%>
+            <div class="mainContainer">
+
+                <div class="mainContainerDiv">
+                    <div class="card">
+                        <div class="cardImageContainer">
+                            <img src="/images/profile-icon.png" alt="" class="profile">
+                        </div>
+                        <div class="cardTextContainer">
+                            <p class="firstp">
+                                All users
+                            </p>
+                            <p class="secondp">
+                                <%= allUsers %>
+                            </p>
+
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="cardImageContainer">
+                            <img src="/images/profile-icon.png" alt="" class="profile">
+                        </div>
+                        <div class="cardTextContainer">
+                            <p class="firstp">
+                                Superagents
+                            </p>
+                            <p class="secondp">
+                                <%= superagents %>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="cardImageContainer">
+                            <img src="/images/profile-icon.png" alt="" class="profile">
+                        </div>
+                        <div class="cardTextContainer">
+                            <p class="firstp">
+                                Agents
+                            </p>
+                            <p class="secondp">
+                                <%= agents %>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="cardImageContainer">
+                            <img src="/images/profile-icon.png" alt="" class="profile">
+                        </div>
+                        <div class="cardTextContainer">
+                            <p class="firstp">
+                                Players
+                            </p>
+                            <p class="secondp">
+                                <%= players %>
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+    </div>
+
+
+    <script>
+        document.getElementById('1').classList.add('currentPage');
+
+        showSettings = () =>{
+            if(document.getElementById('settings').classList == 'hidden'){
+                document.getElementById('settings').classList.remove('hidden');
+
+                document.getElementById('settings').classList.add('settings');
+
+            }
+            else{
+                document.getElementById('settings').classList.remove('settings');
+                document.getElementById('settings').classList.add('hidden');
+
+            }
+            
+        }
+    </script>
+
+
+
+
+</body>
+</html>

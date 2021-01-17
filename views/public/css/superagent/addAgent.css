@@ -1,0 +1,85 @@
+
+.mainContainer{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.mainContainerDiv{
+    position: absolute;
+    top: 10px;
+    width: 97%;
+    height: 85%;
+    background-color: white;
+    border-top: 3px solid #d2d6de;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);  
+    padding-top: 15px;
+    padding-left: 10px; 
+}
+.row{
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.row > label{
+    float: left;
+    width: 15%;
+    font-size: 14px;
+    font-weight: bold;
+}
+.row > input , .row> select{
+    width: 70%;
+    padding: 5px;
+
+}
+
+.row > button{
+    margin-right: 12%;
+    float: right;
+    border: 0px;
+    padding: 5px;
+    background-color: green;
+    color: white;
+}
+
+.row>#isSuspended{
+    width: 15px;
+}
+
+.text{
+    margin-top: 50px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+}
+
+.text > h6{
+    display: inline;
+    font-weight: bold;
+    color: #d2d6de;
+}
+
+
+@keyframes shake {
+    10%, 90% {
+      transform: translate3d(-1px, 0, 0);
+    }
+    
+    20%, 80% {
+      transform: translate3d(2px, 0, 0);
+    }
+  
+    30%, 50%, 70% {
+      transform: translate3d(-4px, 0, 0);
+    }
+  
+    40%, 60% {
+      transform: translate3d(4px, 0, 0);
+    }
+  }
+  .shaking{
+    animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+    transform: translate3d(0, 0, 0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }

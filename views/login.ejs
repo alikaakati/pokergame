@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link src="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <link src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    
+    <link rel="stylesheet" href="/css/login.css" type="text/css">
+    <title>Document</title>
+</head>
+<body>
+
+
+
+    <div class="modal" id="modal">
+        
+            <h1>
+                Username or password are incorrect
+            </h1>
+            <button onclick="closeModal()">close</button>
+        
+    </div>
+
+    <div class="form">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Username</label>
+            <input type="text" name="username" id="username" class="form-control" aria-required placeholder="Enter username">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Password</label>
+            <input type="password" name="pass" id="pass" class="form-control" aria-required placeholder="Enter password">
+        </div>
+        <button type="submit" class="btn " onclick="login()">Submit</button>
+
+        
+
+
+    </div>
+
+
+    <div id="loading" >
+        <div class="loader"></div>
+    </div>
+
+
+    <script>
+
+
+        closeModal = () =>{
+            document.getElementById('modal').classList.remove('show');        
+        }
+        login = async() =>{
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("pass").value;
+            if(username && password){
+
+                var loading = document.getElementById("loading");
+                loading.classList.add("show");
+    
+                
+                let tempData = {username : username, password : password };
+                $.ajax({
+                type:'post',
+                url:'/api/login',
+                data:JSON.stringify(tempData),
+                contentType: "application/json; charset=utf-8",
+                success:function(data){
+                    if(data.level == 'superagent') window.location.replace('./superAgent/index');
+                    else if(data.level == 'moderator') window.location.href = './moderator/index';
+                    else if(data.level == 'agent') window.location.href = './agent/index';
+                    else{
+                        loading.classList.remove("show");
+                        document.getElementById('modal').classList.add('show');
+                    }
+                }
+                });
+            }
+            else{
+
+                alert('Fill both fields')
+
+            }
+
+
+
+
+
+
+
+
+
+        }
+
+    </script>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+    const socket = io('http://localhost:9000');
+    socket.on('message',(message) => console.log(message));
+    
+    </script>
+
+</body>
+</html>
+

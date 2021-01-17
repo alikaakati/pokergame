@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('links'); -%>
+    <link rel="stylesheet" href="/css/superagent/viewAgents.css">
+</head>
+<body>
+    
+    <%- include('header'); -%>
+    <div class="fullContainer">
+        
+        <%- include('sidebar'); -%>>
+            <div class="mainContainer">
+
+                <div class="mainContainerDiv">
+                    <div class="div">
+                    <% if(agents.length > 0){ %>
+
+                        <table id="table_id" class="display compact cell-border hover" >
+                            <thead>
+                                <tr>
+                                    <td>Date</td>
+                                    <td>Username</td>
+                                    <td>Refferal</td>
+                                    <td>Level</td>
+                                    <td>Options</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i=0; i < agents.length; i++) { %>
+                                    <tr id="<%= agents[i].username %>">
+                                        <td>
+                                            <% if(agents[i].time.getDate() < 10){ %>
+                                             <%= '0' + agents[i].time.getDate() %>
+                                            <% } %>
+                                            <% if(agents[i].time.getDate() >= 10){%>
+                                                <%=agents[i].time.getDate() %>
+                                            <% } %>/
+                                            
+                                            <% if(agents[i].time.getMonth() < 10){ %>
+                                                <%= '0' + parseInt(agents[i].time.getMonth() + 1) %>
+                                            <% }else if(agents[i].time.getMonth() >= 10){ %>
+                                                <%=agents[i].time.getMonth() %>
+                                            <% } %>/
+    
+   
+                                            <%= agents[i].time.getFullYear() %> -  
+                                            <%= agents[i].time.toLocaleTimeString() %>
+                                        </td>
+                                        <td><%= agents[i].username %></td>
+                                        <td><%= agents[i].refferal %></td>
+                                        <td><%= agents[i].level %></td>
+                                        <td>
+                                        <a href="./editAgent/<%= agents[i]._id %>">
+                                            Manage
+                                        </a>
+                                        
+                                    </td>
+                                    
+                                    </tr>
+                                <% } %>
+                                
+                        
+                        
+                            </tbody>
+                        </table>
+                    <% }else{ %>
+
+
+                        <h3>You dont have sub agents that refer to you</h3>
+
+
+                    <% } %>
+
+                    </div>
+                </div>
+
+            </div>
+    </div>
+
+
+    <script>
+        showSettings = () =>{
+            if(document.getElementById('settings').classList == 'hidden'){
+                document.getElementById('settings').classList.remove('hidden');
+
+                document.getElementById('settings').classList.add('settings');
+
+            }
+            else{
+                document.getElementById('settings').classList.remove('settings');
+                document.getElementById('settings').classList.add('hidden');
+                
+            }
+            
+        }
+        </script>
+
+
+
+
+<script>
+            document.getElementById('6').classList.add('currentPage');
+
+$(document).ready(function(){
+    var table = $('#table_id').DataTable({
+        "order" : [[0,"desc"]],
+        "scrollY":        "200px",
+        "scrollCollapse": true,
+        "paging":         false,
+        "bInfo": false,
+        "language": {
+            "searchPlaceholder": "Search records",
+            "search" : ""
+        },
+        
+    });
+    $('.dataTables_filter').addClass('pull-left');
+    
+})
+
+</script>
+<script>
+
+</script>
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+    
+ -->

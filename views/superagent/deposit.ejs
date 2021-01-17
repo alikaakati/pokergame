@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    
+
+    <title>Document</title>
+</head>
+<body>
+    
+        <p id="errormsg"></p>
+        <select id='agent'>
+            <% for(let i=0; i<results.length ; i++){ %>
+            <option value="<%= results[i].username %>">
+                <%= results[i].username %></option>
+            <% } %>
+        </select>
+        <input type="number" name="funds" id="funds">
+        <input type="hidden" value="<%= superAgentInfo.funds %>" name="superagentfunds" id="superagentfunds">
+        <h1>You have <%= superAgentInfo.funds %>$ in your account</h1>
+        <button onclick="sendFunds()">Submit</button>
+    
+
+
+        <script>
+            sendFunds = () =>{
+                let agentFunds = parseInt(document.getElementById('funds').value);
+                let agentName = document.getElementById('agent').value;
+                let superAgentFunds = parseInt(document.getElementById('superagentfunds').value);
+                console.log(agentFunds);
+                console.log(superAgentFunds);
+
+                if(agentFunds > superAgentFunds){
+                    alert("You cannot send more than your balance");
+                }
+                else{
+                let tempData = {
+
+                    agent : agentName,
+                    funds : agentFunds
+
+                }
+                $.ajax({
+                    type:'post',
+                    url:'../api/depositFundsToAgent',
+                    data:JSON.stringify(tempData),
+                    contentType: "application/json; charset=utf-8",
+                    success:function(resp){
+                        if(resp.success){
+                            console.log(resp);
+                            window.location.reload();
+                        }
+                    }
+                });
+
+
+
+
+
+
+
+                }
+                
+
+            }
+        </script>
+
+</body>
+</html>

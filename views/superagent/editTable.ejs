@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <title>Document</title>
+</head>
+<body>
+    
+
+
+<div class="main" style="width: 100vw;height: 100vh;display: flex;justify-content: center;align-items: center;">
+
+    
+        <form action="/superAgent/updateTableInfo/<%= id %>" method="post">
+            
+            <div class="form-group">
+                <label for="exampleInputEmail1">Table name</label>
+                <input type="text" name="Name" id="username" class="form-control" aria-required placeholder="Enter username" value="<%= result.Name %>">
+            </div>
+    
+            <div class="form-group">
+                <label for="exampleInputEmail1">Maximum players capacity</label>
+                <input type="text" name="MaxCapacity" id="username" class="form-control" aria-required placeholder="Enter Maximum player capacity" value="<%= result.MaxCapacity %>">
+            </div>
+    
+            <div class="form-group">
+                <label for="exampleInputEmail1">Minimum stakes</label>
+                <input type="text" name="MinStake" id="username" class="form-control" aria-required placeholder="Enter Minimum stake" value="<%= result.MinStake %>">
+            </div>
+    
+            <div class="form-group">
+                <label for="exampleInputEmail1">Rake</label>
+                <input type="text" name="Rake" id="username" class="form-control" aria-required  value="<%= result.Rake %>">
+            </div>
+    
+            
+            <button type="submit">Update</button>
+    
+    
+        
+        </form>
+
+</div>
+
+
+
+</body>
+</html>

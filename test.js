@@ -1,12 +1,13 @@
 const app = require('express')();
 const http = require('http').createServer(app);
-const io = require('socket.io')(http);
-const port = process.env.PORT || 9000;
+const io = require("socket.io")(http,{pingTimeout: 10000, pingInterval: 30000});
+const port = process.env.PORT || 3000;
 app.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
 io.on('connection', (socket) => {
-    console.log('a user connected');
+
+    io.emit('working');
     socket.on('chat', (msg) => {
     	var obj = JSON.parse(msg);
     	if (obj['email'] == "hadi@gmail.com" && obj['password'] == "123"){
@@ -24,10 +25,15 @@ io.on('connection', (socket) => {
 	}
     	console.log(obj);
     });
-    socket.on('disconnect', () => {
-        console.log('user disconnected');
-    });
+
+	io.on('error', (err) => {
+        console.log('Fluffy error', err)
+    })
 });
+io.on('connect_error', err => handleErrors(err));
+io.on('connect_failed', err => handleErrors(err));
+io.on('disconnect', err => handleErrors(err));
+
 http.listen(port, () => {
-    console.log('Connected at 9000');
+    console.log('Connected at ' + port);
 });

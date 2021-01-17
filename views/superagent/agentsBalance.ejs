@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('links'); -%>
+    <link rel="stylesheet" href="/css/superagent/viewAgents.css">
+
+</head>
+<body>
+    <%- include('header'); -%>
+
+    <div class="fullContainer">
+        <%-  include('sidebar'); -%>
+            <div class="mainContainer">
+
+                <div class="mainContainerDiv">
+                    <div class="div">
+                    <% if(agents.length > 0){ %>
+
+                        <table id="table_id" class="display  hover" >
+                            <thead>
+                                <tr>
+                                    <td>Username</td>
+                                    <td>USD Funds</td>
+                                    <td>LBP Funds</td>
+                                    <td>Options</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i=0; i < agents.length; i++) { %>
+                                    <tr id="<%= agents[i].username %>">
+                                        <td><%= agents[i].username %></td>
+                                        <td class="numUSD"><%= agents[i].fundsUSD %></td>
+                                        <td class="numLBP"><%= agents[i].fundsLBP %></td>
+                                        <td>
+                                        <a href="./transfer %>">
+                                            Deposit / Withdraw
+                                        </a>
+                                        
+                                    </td>
+                                    
+                                    </tr>
+                                <% } %>
+                                <tr>
+                                    <td></td>
+                                    <td id='totalUSD'>Total : </td>
+                                    <td id='totalLBP'>Total : </td>
+                                    <td></td>
+                                </tr>
+                                
+                        
+                        
+                            </tbody>
+                            
+                        </table>
+                    <% }else{ %>
+
+
+                        <h3>You dont have sub agents that refer to you</h3>
+
+
+                    <% } %>
+
+                    </div>
+                </div>
+
+            </div>
+    </div>
+
+
+    <script>
+        document.getElementById('7').classList.add('currentPage');
+
+        showSettings = () =>{
+            if(document.getElementById('settings').classList == 'hidden'){
+                document.getElementById('settings').classList.remove('hidden');
+
+                document.getElementById('settings').classList.add('settings');
+
+            }
+            else{
+                document.getElementById('settings').classList.remove('settings');
+                document.getElementById('settings').classList.add('hidden');
+                
+            }
+            
+        }
+        </script>
+
+    <script>
+        
+        let elements = document.getElementsByClassName('numUSD');
+        let sum = 0;
+        for (let i = 0; i < elements.length; i++) {
+            sum+= parseInt(elements[i].innerHTML);
+        }
+        document.getElementById('totalUSD').innerHTML = "<b> Total: " + sum + "$</b>";
+
+        elements = document.getElementsByClassName('numLBP');
+        sum = 0;
+        for (let i = 0; i < elements.length; i++) {
+            sum+= parseInt(elements[i].innerHTML);
+        }
+        document.getElementById('totalLBP').innerHTML = "<b> Total: " + sum + "LL</b>";
+
+    </script>
+
+
+
+
+<script>
+$(document).ready(function(){
+    var table = $('#table_id').DataTable({
+        "order" : [[0,"desc"]],
+        "scrollY":        "200px",
+        "scrollCollapse": true,
+        "paging":         false,
+        "bInfo": false,
+        "language": {
+            "search": "Filter records:"
+        }
+    });
+    
+})
+
+</script>
+
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+    
+ -->

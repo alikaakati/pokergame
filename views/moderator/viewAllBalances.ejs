@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('links'); -%>
+    <link rel="stylesheet" href="/css/superagent/viewAgents.css">
+</head>
+<body>
+    
+    <%- include('header'); -%>
+    <div class="fullContainer">
+        
+        <%- include('sidebar'); -%>
+            <div class="mainContainer">
+
+                <div class="mainContainerDiv">
+                    <div class="div">
+
+                        <table id="table_id" class="display  hover" >
+                            <thead>
+                                <tr>
+                                    <td>Username</td>
+                                    <td>Funds USD</td>
+                                    <td>Funds LBP</td>
+                                    <td>Options</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <% for(var i=0; i < users.length; i++) { %>
+                                    <tr id="<%= users[i].username %>">
+                                        <td><%= users[i].username %></td>
+                                        <td>$ <%= users[i].fundsUSD %></td>
+                                        <td><%= users[i].fundsLBP %> L.B.P</td>
+                                        <td style="cursor:pointer">
+                                            <p onclick="window.location.href='./editAgent/<%= users[i]._id %>'"> 
+
+                                                <a href = '#'>
+                                                    Deposit 
+                                                
+                                                </a>
+                                                &emsp;
+                                                <a href="#">
+                                                    Withdraw 
+                                                
+                                                </a>
+                                            </p>
+                                        
+                                        
+                                    </td>
+                                    
+                                    </tr>
+                                <% } %>
+                                
+                        
+                        
+                            </tbody>
+                        </table>
+                    </div>
+   
+
+                </div>
+
+            </div>
+    </div>
+
+
+    <script>
+        document.getElementById('5').classList.add('currentPage');
+
+        showSettings = () =>{
+            if(document.getElementById('settings').classList == 'hidden'){
+                document.getElementById('settings').classList.remove('hidden');
+
+                document.getElementById('settings').classList.add('settings');
+
+            }
+            else{
+                document.getElementById('settings').classList.remove('settings');
+                document.getElementById('settings').classList.add('hidden');
+                
+            }
+            
+        }
+        </script>
+
+        <script>
+                   addUser = () => {
+        
+                    let username = document.getElementById('username').value;
+                    let password = document.getElementById('password').value;
+                    let funds = document.getElementById('funds').value;
+                    
+                    let tempData = {
+                        username : username,
+                        password : password,
+                        funds : funds,
+                    
+                    };
+                    $.ajax({
+                    type:'post',
+                    url:'../api/registerUser',
+                    data:JSON.stringify(tempData),
+                    contentType: "application/json; charset=utf-8",
+                    success:function(resp){
+                            if(resp.added == 'added User successfully !'){
+                                window.location.href = './viewAllUsers';
+                            }
+                            else{
+                                alert(resp.error);
+                            }
+                    }
+                });
+        
+                
+                
+                
+                
+                
+            }
+                </script>
+
+
+
+<script>
+$(document).ready(function(){
+    var table = $('#table_id').DataTable({
+        "order" : [[0,"desc"]],
+        "scrollY":        "200px",
+        "scrollCollapse": true,
+        "paging":         false,
+        "bInfo": false,
+        "language": {
+            "search": "Filter records:"
+        }
+    });
+    
+})
+
+</script>
+<script>
+
+    askToDelete = () =>{
+        let username = document.getElementById('usernametodelete').value;
+
+        let tempData = {username : username};
+        $.ajax({
+            type:'post',
+            url:'../api/deleteAgent',
+            data:JSON.stringify(tempData),
+            contentType: "application/json; charset=utf-8",
+            success:function(data){
+                window.location.reload();            
+            }
+        });
+
+    }
+</script>
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+    
+ -->

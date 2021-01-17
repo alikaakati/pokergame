@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('links'); -%>
+
+    <link rel="stylesheet" href="/css/superagent/addAgent.css">
+</head>
+<body>
+    
+    <%- include('header'); -%>
+
+    <div class="fullContainer">
+        
+        <%- include('sidebar'); -%>
+
+            <div class="mainContainer">
+                <div class="mainContainerDiv">
+                <h5 id='errormsg'></h5>
+                <div class="row">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" id="username" placeholder="Username..">
+
+                </div>
+                <div class="row">
+                    <label for="password">Password</label>
+                    <input type="password" name="password" id="password" placeholder="Password..">
+                </div>
+                <div class="row">
+                    <label for="fundsUSD">USD Funds</label>
+                    <input type="number" name="fundsUSD" id="fundsUSD" placeholder="USD Funds.. Max (<%= fundsUSD %>)">
+                </div>
+                <div class="row">
+                    <label for="fundsLBP">LBP Funds</label>
+                    <input type="number" name="fundsLBP" id="fundsLBP" placeholder="LBP Funds.. Max (<%= fundsLBP %>)">
+                </div>
+                <div class="row">
+                    <label for="rake">Rake</label>
+                    <input type="number" name="rake" id="rake" placeholder="Rake.. Max (<%= rake %>)">
+                </div>
+                <div class="row">
+                    <label for="phone">Phone</label>
+                    <input type="text" name="phone" id="phone" placeholder="Phone number..">
+                </div>
+                <div class="row">
+                    <button onclick="addUser()">
+                        Add agent
+                    </button>
+                </div>
+                <div class="text">
+                <h6 id='rakeError'>
+                    Your rake is <%= rake %>
+                </h6>
+                <h6 id='usdfundsError'>
+                    You have <%= fundsUSD %>$ in your account
+
+                </h6>
+                <h6  id='lbpfundsError'>
+                    You have <%= fundsLBP %>LL in your account
+                </h6>
+
+                </div>
+            </div>
+
+
+            </div>
+    </div>
+
+
+    <script>
+        document.getElementById('12').classList.add('currentPage');
+
+        showSettings = () =>{
+            if(document.getElementById('settings').classList == 'hidden'){
+                document.getElementById('settings').classList.remove('hidden');
+
+                document.getElementById('settings').classList.add('settings');
+
+            }
+            else{
+                document.getElementById('settings').classList.remove('settings');
+                document.getElementById('settings').classList.add('hidden');
+                
+            }
+            
+        }
+        </script>
+
+        <script>
+                   addUser = () => {
+                       
+                    let mrake = parseInt('<%= rake %>');
+                    let mfundsUSD = parseInt('<%= fundsUSD %>');
+                    let mfundsLBP = parseInt('<%= fundsLBP %>');
+                    
+                    let username = document.getElementById('username').value;
+                    let password = document.getElementById('password').value;
+                    let fundsUSD = document.getElementById('fundsUSD').value || 0;
+                    let fundsLBP = document.getElementById('fundsLBP').value || 0;
+                    let rake = document.getElementById('rake').value;
+                    let phone = document.getElementById('phone').value;
+                    let isSuspended = false;
+                    if(username == '' || password == '' || rake == '' ){
+                        alert('Fill in all required fields');
+                        return;
+                    }
+                    if(fundsUSD > mfundsUSD){
+                        document.getElementById('usdfundsError').style.color = 'red';    
+                        document.getElementById('usdfundsError').style.letterSpacing = 3;    
+                        document.getElementById('usdfundsError').classList.add('shaking');
+
+                        setTimeout(() => {
+                            document.getElementById('usdfundsError').classList.remove('shaking');
+                            document.getElementById('usdfundsError').style.color = '#d2d6de';    
+                        }, 5000);
+                        return;
+                    }
+                    if(fundsLBP > mfundsLBP){
+                        document.getElementById('lbpfundsError').style.color = 'red';    
+                        document.getElementById('lbpfundsError').style.letterSpacing = 3;    
+
+                        document.getElementById('lbpfundsError').classList.add('shaking');
+
+                        setTimeout(() => {
+                            document.getElementById('rakeError').classList.remove('shaking');
+                            document.getElementById('lbpfundsError').style.color = '#d2d6de';    
+                        }, 5000);
+                        return;
+                    }
+                    if(rake >= mrake){
+                        document.getElementById('rakeError').style.color = 'red';    
+                        document.getElementById('rakeError').style.letterSpacing = 3;    
+
+                        document.getElementById('rakeError').classList.add('shaking');
+
+                        setTimeout(() => {
+                            document.getElementById('rakeError').classList.remove('shaking');
+                            document.getElementById('rakeError').style.color = '#d2d6de';    
+                        }, 5000);
+                        return;
+                    }
+                    
+                    let tempData = { username , password , fundsUSD , fundsLBP , rake , phone , isSuspended};
+                    $.ajax({
+                    type:'post',
+                    url:'../api/registerAgent',
+                    data:JSON.stringify(tempData),
+                    contentType: "application/json; charset=utf-8",
+                    success:function(resp){
+                        console.log(resp);    
+                        
+                    }
+                });
+        
+                
+                
+                
+                
+                
+            }
+        </script>
+
+
+
+</body>
+</html> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

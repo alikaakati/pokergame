@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('links'); -%>
+    <link rel="stylesheet" href="/css/moderator/transfer.css">
+
+</head>
+<body>
+    
+    <%- include('header'); -%>
+    <div class="fullContainer">
+        
+        <%- include('sidebar'); -%>
+            <div class="mainContainer">
+
+                <div class="mainContainerDiv">
+                    
+                    <div class="firstRow">
+                        <div class="firstRowLeft">
+                            <p>
+                                Transfer
+                            </p>
+                        </div>
+
+                        <div class="firstRowRight">
+                            <div class="firstRowRightImageContainer">
+                                <img class="logo" src="/images/profile-icon.png" alt="My_Logo" >
+                            </div>
+                            <div class="firstRowRightInfoContainer">
+                                <h1 class="title">
+                                    Your balance
+                                </h1>
+                                <h1 class="info">
+                                    INFINITE
+                                </h1>
+                            </div>
+                        </div>
+                        
+
+                    </div>
+
+
+                    <div class="navigation">
+
+                        <button id='USD' class="active" onclick="setActiveFirst()">USD</button>
+                        <button id='LBP' onclick="setActiveSecond()">LBP</button>
+
+                    </div>
+                    <div class="secondRow" id='transferUSD' >
+                        <select name="accountUSD" id="accountUSD">
+                            <% for(var i=0; i < accounts.length; i++) { %>
+                                <option value="<%= accounts[i].username %>"> <%= accounts[i].username %> , <%= accounts[i].fundsUSD %> USD </option>
+                                <% } %>
+
+                        </select>
+                        
+                        <input type="number" name="fundsUSD" id="fundsUSD" placeholder="Funds.." >
+                        <input type="text" name="noteUSD" id="noteUSD" placeholder="Note..">
+                        <div class="buttonContainer">
+                            <button onclick="depositUSD()">
+                                Deposit
+                            </button>
+                            <button onclick="withdrawUSD()"> 
+                                Withdraw
+                            </button>
+                        </div>
+                        <p id='errormsg' style="font-size: 7px;color: red;font-weight: 900;">
+
+                        </p>
+                    </div>
+                    <div class="secondRow" id='transferLBP' >
+                        <select name="account" id="accountLBP">
+                            <% for(var i=0; i < accounts.length; i++) { %>
+                                <option value="<%= accounts[i].username %>"> <%= accounts[i].username %> , <%= accounts[i].fundsLBP %> LBP </option>
+                                <% } %>
+
+                        </select>
+                        
+                        <input type="number" name="fundsLBP" id="fundsLBP" placeholder="Funds.." >
+                        <input type="text" name="noteLBP" id="noteLBP" placeholder="Note..">
+                        <div class="buttonContainer">
+                            <button onclick="depositLBP()">
+                                Deposit
+                            </button>
+                            <button onclick="withdrawLBP()"> 
+                                Withdraw
+                            </button>
+                        </div>
+                        <p id='errormsg2' style="font-size: 7px;color: red;font-weight: 900;">
+
+                        </p>
+                    </div>
+
+
+
+
+                </div>
+
+            </div>
+    </div>
+
+
+
+
+    <script>
+        document.getElementById('2').classList.add('currentPage');
+
+        setActiveFirst = () =>{
+            document.getElementById('LBP').classList.remove('active');
+            document.getElementById('USD').classList.add('active');
+            document.getElementById('transferLBP').style.display = 'none';
+            document.getElementById('transferUSD').style.display = 'block';
+            
+        }
+        
+        setActiveSecond = () =>{
+            document.getElementById('USD').classList.remove('active');
+            document.getElementById('LBP').classList.add('active');
+            document.getElementById('transferLBP').style.display = 'block';
+            document.getElementById('transferUSD').style.display = 'none';
+
+        }
+        // Convert the number to a string and show it in the input
+        // .toLocaleString();
+        // //
+
+
+        // //
+        
+        // convert the string to number
+        // .replace(/,/g, '');
+
+    </script>
+    <script>
+        showSettings = () =>{
+            if(document.getElementById('settings').classList == 'hidden'){
+                document.getElementById('settings').classList.remove('hidden');
+
+                document.getElementById('settings').classList.add('settings');
+
+            }
+            else{
+                document.getElementById('settings').classList.remove('settings');
+                document.getElementById('settings').classList.add('hidden');
+
+            }
+            
+        }
+    </script>
+
+
+
+    <script>
+        depositUSD = () =>{
+
+            console.log('deposit usd');
+
+
+            let fundsUSD = document.getElementById('fundsUSD').value;
+            if(fundsUSD == 0) document.getElementById('errormsg').innerHTML = 'Please insert amount';
+            else if(fundsUSD < 0) document.getElementById('errormsg').innerHTML = 'You cannot deposit a negative amount';
+            else if(fundsUSD > 0){
+                let accountUSD = document.getElementById('accountUSD').value;
+                let noteUSD = document.getElementById('noteUSD').value;
+                let tempData = {
+                    fundsUSD,
+                    accountUSD,
+                    noteUSD
+                }
+                
+                $.ajax({
+                    type:'post',
+                    url:'../api/depositUSDFundsToSuperAgent',
+                    data:JSON.stringify(tempData),
+                    contentType: "application/json; charset=utf-8",
+                    success:function(resp){
+                    
+                        if(resp.success){
+                            window.location.href = './transactions';
+                        }
+                        else{
+                            document.getElementById('errormsg').innerHTML = ' An erro occured , please try again later';
+                        }
+                    
+                    }
+                });
+
+            }
+
+        }
+
+        depositLBP = () =>{
+
+            console.log('deposit LBP');
+
+
+            let fundsLBP = document.getElementById('fundsLBP').value;
+            if(fundsLBP == 0) document.getElementById('errormsg2').innerHTML = 'Please insert amount';
+            else if(fundsLBP < 0) document.getElementById('errormsg2').innerHTML = 'You cannot deposit a negative amount';
+            else if(fundsLBP > 0){
+                let accountLBP = document.getElementById('accountLBP').value;
+                let noteLBP = document.getElementById('noteLBP').value;
+                let tempData = {
+                    fundsLBP,
+                    accountLBP,
+                    noteLBP
+                }
+                
+                $.ajax({
+                    type:'post',
+                    url:'../api/depositLBPFundsToSuperAgent',
+                    data:JSON.stringify(tempData),
+                    contentType: "application/json; charset=utf-8",
+                    success:function(resp){
+                        if(resp.success){
+                            window.location.href = './transactions';
+                        }
+                        else{
+                            document.getElementById('errormsg2').innerHTML = ' An error an occured please try again later';
+                        }
+
+                    
+                    }
+                });
+
+            }
+
+        }
+
+
+
+
+        withdrawUSD = () =>{
+            console.log('deposit usd');
+
+
+            let fundsUSD = document.getElementById('fundsUSD').value;
+            if(fundsUSD == 0) document.getElementById('errormsg').innerHTML = 'Please insert amount';
+            else if(fundsUSD < 0) document.getElementById('errormsg').innerHTML = 'You cannot withdraw a negative amount';
+            else if(fundsUSD > 0){
+                let accountUSD = document.getElementById('accountUSD').value;
+                let noteUSD = document.getElementById('noteUSD').value;
+                let tempData = {
+                    fundsUSD,
+                    accountUSD,
+                    noteUSD
+                }
+                console.log(tempData);
+
+                $.ajax({
+                    type:'post',
+                    url:'../api/withdrawUSDFundsFromSuperAgent',
+                    data:JSON.stringify(tempData),
+                    contentType: "application/json; charset=utf-8",
+                    success:function(resp){
+                        if(resp.success){
+                            window.location.href = './transactions';
+                        }
+                        else if(resp.insufficientFunds) document.getElementById('errormsg').innerHTML = resp.insufficientFunds;
+                        else{
+                            document.getElementById('errormsg').innerHTML = 'An error occured , please try again later';
+                        }
+                    
+                    }
+                });
+
+            }
+
+        }
+
+
+
+        withdrawLBP = () =>{
+
+            console.log('withdraw LBP');
+
+
+            let fundsLBP = document.getElementById('fundsLBP').value;
+            if(fundsLBP == 0) document.getElementById('errormsg2').innerHTML = 'Please insert amount';
+            else if(fundsLBP < 0) document.getElementById('errormsg2').innerHTML = 'You cannot withdraw a negative amount';
+            else if(fundsLBP > 0){
+                let accountLBP = document.getElementById('accountLBP').value;
+                let noteLBP = document.getElementById('noteLBP').value;
+                let tempData = {
+                    fundsLBP,
+                    accountLBP,
+                    noteLBP
+                }
+                
+                $.ajax({
+                    type:'post',
+                    url:'../api/withdrawLBPFundsFromSuperAgent',
+                    data:JSON.stringify(tempData),
+                    contentType: "application/json; charset=utf-8",
+                    success:function(resp){
+                        if(resp.success){
+                            window.location.href = './transactions';
+                        }
+                        else if(resp.insufficientFunds) document.getElementById('errormsg2').innerHTML = resp.insufficientFunds;
+                        else{
+                            document.getElementById('errormsg2').innerHTML = 'An error occured , please try again later';
+                        }
+                    }
+                });
+
+            }
+
+        }
+ 
+    </script>
+
+</body>
+</html>

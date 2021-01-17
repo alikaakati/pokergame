@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/static/sidebar.css">
+    <link rel="stylesheet" href="/css/static/header.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="header">
+
+        <div class="headerLeft">
+            <h5 class="headerLeftText">Affiliate backoffice</h5>
+        </div>
+
+        <div class="headerRight" onclick="showSettings()">
+            <i class="fa fa-user icon2"></i>
+            <h5><%= username %></h5>
+        </div>
+
+    </div>
+    <div class="hidden" id="settings">
+        <button>view profile</button>
+        <button class="signout">Sign out</button>
+    </div>
+    <div class="fullContainer">
+        
+            <div class="mainSideBar">
+                <div class="mainSideBarTitle">
+                    <h6>Menu</h6>
+                </div>
+                <div class="mainSideBarElements">
+                    <ul>
+                        <li onclick="window.location.href = './index' ">
+                            <i class="fa icon fa-balance-scale"></i>
+                            <p>
+
+                                Balance
+                            </p>
+                        </li>
+        
+                        <li  onclick="window.location.href = './transfer' ">
+                            <i class="fa icon fa-exchange"></i>
+                            <p>
+                                Transfer
+                            </p>
+                        </li>
+        
+                        <li onclick="window.location.href = './transactions' ">
+                            <i class="fa icon fa-money"></i>
+                            <p>
+                                Transactions
+                            </p>
+                        </li>
+        
+        
+                        <li onclick="window.location.href = './viewUsers' ">
+                            <i class="fa icon fa-users"></i>
+                            <p>
+                                Players list
+                            </p>
+                        </li>
+        
+        
+        
+                        <li onclick="window.location.href='./viewAgents'">
+                            <i class="fa icon fa-users"></i>
+                            <p>
+                                Agents list
+                            </p>
+                        </li>
+        
+                        <li onclick="window.location.href = './agentsBalance' ">
+                            <i class="fa icon fa-users"></i>
+                            <p>
+                                Agents balance
+                            </p>
+                        </li>
+        
+        
+                        <li onclick="window.location.href = './revenueFromPlayers' ">
+                            <i class="fa icon fa-file"></i>
+                            <p>
+                                Revenue from players
+                            </p>
+                        </li>
+        
+        
+                        <li onclick="window.location.href = './revenueFromAllPlayers' ">
+                            <i class="fa icon fa-file"></i>
+                            <p>
+                                Revenue from players all
+                            </p>
+                        </li>
+        
+        
+                        <li onclick="window.location.href = './revenueFromAgents' ">
+                            <i class="fa icon fa-file"></i>
+                            <p>
+                                Revenue from agents
+                            </p>
+                        </li>
+        
+        
+                        <li onclick="window.location.href = './revenueFromAllAgents' ">
+                            <i class="fa icon fa-file"></i>
+                            <p>
+                                Revenue from agents all
+                            </p>
+                        </li>
+        
+        
+        
+                        <li onclick="window.location.href = './addAgent' ">
+                            <i class="fa icon fa-user-plus"></i>
+                            <p>
+                                Create agent
+                            </p>
+                        </li>
+        
+                        <li onclick="window.location.href = './addUser' ">
+                            <i class="fa icon fa-user-plus"></i>
+                            <p>
+                                Create player
+                            </p>
+                        </li>
+        
+                        <li class="currentPage" onclick="window.location.href = './profile' ">
+                            <i class="fa icon fa-user-secret"></i>
+                            <p>
+                                My profile
+                            </p>
+                        </li>
+        
+        
+                    </ul>
+                </div>
+            </div>
+            <div class="mainContainer">
+
+                <div class="mainContainerDiv" >
+                    
+                </div>
+
+            </div>
+    </div>
+
+
+    <script>
+        showSettings = () =>{
+            if(document.getElementById('settings').classList == 'hidden'){
+                document.getElementById('settings').classList.remove('hidden');
+
+                document.getElementById('settings').classList.add('settings');
+
+            }
+            else{
+                document.getElementById('settings').classList.remove('settings');
+                document.getElementById('settings').classList.add('hidden');
+
+            }
+            
+        }
+    </script>
+
+
+
+
+</body>
+</html>

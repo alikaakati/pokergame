@@ -1,0 +1,55 @@
+
+.mainContainer{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.mainContainerDiv{
+    position: absolute;
+    top: 10px;
+    width: 97%;
+    height: 85%;
+    background-color: white;
+    border-top: 3px solid #d2d6de;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);  
+    padding-top: 15px;
+    padding-left: 10px; 
+}
+
+.row{
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+}
+.row > label{
+    display: inline-block;
+    width: 10%;
+    font-size: 14px;
+    font-weight: bold;
+}
+.row > input , .row> select{
+    width: 70%;
+    padding: 5px;
+}
+.suspend{
+    display: inline-block;
+    border:0px;
+    background-color: red;
+    padding: 5px;
+    width: 15%;
+    font-family: 12px;
+    height: 40px;
+    color: white;
+}
+.resetPass{
+
+    margin-top: 15px;
+    border:0px;
+    background-color: grey;
+    padding: 5px;
+    width: 15%;
+    height: 40px;
+    font-family: 12px;
+    color: white;
+}

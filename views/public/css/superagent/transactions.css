@@ -1,0 +1,68 @@
+
+.mainContainer{
+    display: flex;
+    justify-content: center;
+    position: relative;
+}
+.mainContainerDiv{
+    position: absolute;
+    top: 10px;
+    width: 97%;
+    height: 85%;
+    background-color: white;
+    border-top: 3px solid #d2d6de;
+    border-radius: 3px;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);  
+    padding-top: 15px;
+    padding-left: 10px; 
+}
+table{
+    margin-right: 25px;
+    font-size: 8px;
+}
+.dataTables_filter input{
+    font-size: 8px;
+}
+.dataTables_filter label{
+
+    font-size: 12px;
+
+}
+.div{
+    width: 95%;
+    height: 250px;
+    margin-left: 2%;
+}
+
+
+.toDelete{
+    width: 95%;
+    height: 100px;
+    margin-left: 2%;
+}
+table > thead > tr > td{
+    font-size: 12px;
+}
+table > tbody > tr > td{
+    font-size: 9.5px;
+    padding: 12px !important;
+}
+table > tbody > tr:hover{
+    
+}
+
+.toDelete > *{
+    margin-bottom: 10px;
+    padding: 5px;
+    width: 20%;
+}
+.toDelete > select{
+    width: 25%;
+}
+.toDelete > button{
+    background-color: red;
+    border: 0px;
+    padding: 7.5px;
+    color: white;
+    font-size: 12px;
+}

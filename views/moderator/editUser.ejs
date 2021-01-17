@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/moderator/editUser.css">
+    <link rel="stylesheet" href="/css/static/sidebar.css">
+    <link rel="stylesheet" href="/css/static/header.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div class="header">
+
+        <div class="headerLeft">
+            <h5 class="headerLeftText">Affiliate backoffice</h5>
+        </div>
+
+        <div class="headerRight" onclick="showSettings()">
+            <i class="fa fa-user icon2"></i>
+            <h5><%= username %></h5>
+        </div>
+
+    </div>
+    <div class="hidden" id="settings">
+        <button>view profile</button>
+        <button class="signout">Sign out</button>
+    </div>
+    <div class="fullContainer">
+        
+            <div class="mainSideBar">
+                <div class="mainSideBarTitle">
+                    <h6>Menu</h6>
+                </div>
+                <div class="mainSideBarElements">
+                    <ul>
+                        <li   onclick="window.location.href = './index' ">
+                            <i  class="fa icon fa-balance-scale"></i>
+                            <p>
+
+                                Dashboard
+                            </p>
+                        </li>
+        
+                        <li onclick="window.location.href = './transfer' ">
+                            <i class="fa icon fa-exchange"></i>
+                            <p>
+                                Transfer
+                            </p>
+                        </li>
+        
+                        <li onclick="window.location.href = './transactions' ">
+                            <i class="fa icon fa-money"></i>
+                            <p>
+                                Transactions
+                            </p>
+                        </li>
+        
+        
+                        <li class="currentPage" onclick="window.location.href = './viewAllUsers' ">
+                            <i class="fa icon fa-users"></i>
+                            <p>
+                                All users list
+                            </p>
+                        </li>
+        
+        
+        
+        
+                        <li onclick="window.location.href = './viewAllBalances' ">
+                            <i class="fa icon fa-users"></i>
+                            <p>
+                                All users balance
+                            </p>
+                        </li>
+                        
+                        <li onclick="window.location.href = './addSuperAgent' ">
+                            <i class="fa icon fa-user-plus"></i>
+                            <p>
+                                Create superagent
+                            </p>
+                        </li>
+                        
+        
+                        <li onclick="window.location.href = './profile' ">
+                            <i class="fa icon fa-user-secret"></i>
+                            <p>
+                                My profile
+                            </p>
+                        </li>
+        
+        
+                    </ul>
+                </div>
+            </div>
+            <div class="mainContainer">
+
+                <div class="mainContainerDiv">
+                    <div class="row">
+
+                        <label for="username">Username</label>
+                        <input type="text" name="username" id="username" value="<%= user.username %>" disabled>
+
+                    </div>
+                    
+                    <div class="row">
+
+
+                        <label for="level">Level</label>
+                        <select name="level" id="level">
+                            <% if(user.level == 'superagent'){ %>
+                                <option value="superagent">superagent</option>
+                                <option value="agent">agent</option>
+                                <option value="user">user</option>
+                            <% } %>
+                            <% if(user.level == 'agent'){ %>
+                                <option value="agent">agent</option>
+                                <option value="superagent">superagent</option>
+                                <option value="user">user</option>
+                            <% } %>
+                            <% if(user.level == 'user'){ %>
+                                <option value="user">user</option>
+                                <option value="agent">agent</option>
+                                <option value="superagent">superagent</option>
+                            <% } %>
+    
+                            
+                        </select>
+
+                    </div>
+                    <% if(user.level == 'superagent' || user.level == 'agent'){%>
+                    <div class="row">
+
+
+                        <label for="rake">Rake</label>
+                        <input type="number" name="rake" id="rake" value="<%= user.rake %>">
+                            
+                    </div>
+                    <% } %>
+                    <div class="row">
+
+                        <label for="phone">Phone</label>
+                        <input type="text" name="phone" id="phone" value="<%= user.phone %>">
+
+                    </div>
+                    <div class="row">
+                        <label for=""></label>
+                        <button class="resetPass" onclick="updateUser()">Submit</button>
+                    </div>
+                    <!-- <div class="row">
+
+                        <% if(user.isSuspended){ %>
+                            <button class="unsuspend">Unsuspend account</button>
+                            <button class="resetPass">Reset pass</button>
+                        <% } else{ %>
+                            <button class="suspend">Suspend account</button>
+                            <button class="resetPass">Reset pass</button>
+                            <p>will set the pass to 0555</p>
+                            <% } %>
+                    </div> -->
+                </div>
+
+            </div>
+    </div>
+    <script>
+    updateUser = () =>{
+        let level = document.getElementById('level').value;
+        let rake = 0; 
+        if(document.getElementById('rake') != null){
+            rake = document.getElementById('rake').value;
+        } 
+        let phone = document.getElementById('phone').value;
+        let username = document.getElementById('username').value;
+        let tempData = { username , level , rake , phone } ;
+        $.ajax({
+            type:'post',
+            url:'../../api/updateUserBySuperagent',
+            data:JSON.stringify(tempData),
+            contentType: "application/json; charset=utf-8",
+            success:function(resp){
+                if(resp.success){
+                    window.location.href = 'http://localhost:9000/moderator/viewAllUsers';
+                }
+                else{
+                    alert('an error occured');
+                }
+            
+            }
+        });
+
+    }        
+    </script>
+
+    <script>
+        showSettings = () =>{
+            if(document.getElementById('settings').classList == 'hidden'){
+                document.getElementById('settings').classList.remove('hidden');
+
+                document.getElementById('settings').classList.add('settings');
+
+            }
+            else{
+                document.getElementById('settings').classList.remove('settings');
+                document.getElementById('settings').classList.add('hidden');
+
+            }
+            
+        }
+    </script>
+
+
+
+
+</body>
+</html>

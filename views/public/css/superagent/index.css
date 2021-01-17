@@ -1,0 +1,116 @@
+
+.tableContainer{
+    width: 60vw;
+    height: 70vh;
+}
+.mainContainerRest > .table{
+    width: 60%;
+    height: 30vh;
+;
+}
+.fullContainer{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+
+.dataTables_filter input{
+    width: 80px;
+    height: 20px;
+    margin-right: 15px;
+    font-size: 10px;
+}
+
+#table_id {
+}
+
+.dataTables_filter select{
+    width: 50px;
+    height: 20px;
+}
+
+
+
+
+
+.mainContainerFirstRow{
+    width: 100%;
+    height: 20vh;
+    display: flex;
+    align-items: center;
+}
+
+.cards{
+    margin-left: 15px;
+    width: 25%;
+    height: 15vh;
+    background-color: white;
+    display: flex;
+
+}
+.cardLeftElement > img{
+
+    width: 100%;
+    height: 120%;
+
+}
+#money-icon{
+    width: 70%;
+    height: 70%;
+}
+.cardLeftElement{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow-y: hidden;
+    width: 40%;
+    height: 100%;
+    float: left;
+    background-color: grey;
+}
+.cardRightElement{
+    flex-grow: 1;
+    float: left;
+}
+.firstp{
+    font-size: 12px;
+    color: #4b646f;
+}
+.secondp{
+    font-size: 11px;
+    font-weight: bolder;
+    color: black;
+}
+.cardRightElement > *{
+    padding-top: 3px;
+    padding-left: 5px;
+}
+
+
+
+
+
+
+button{
+    cursor: pointer;
+}
+
+table{
+    font-size: 10px;
+    overflow-y: hidden;
+}
+
+
+
+.mainContainerRest{
+    flex-grow: 1;
+    margin-bottom: 100px;
+    background-color: white;
+    border-top: 2px solid rgba(126, 47, 47, 0.068);
+    margin-left: 15px;
+    display: flex;
+    justify-content: center;
+    
+    align-items: center
+}
+

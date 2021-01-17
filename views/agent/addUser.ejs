@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link src="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
+    <link src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.css">
+
+
+    <title>Document</title>
+</head>
+<body>
+    
+
+        <input type="text" name="username" id="username" placeholder="username..">
+        <input type="password" name="password" id="password" placeholder="password..">
+        <input type="number" name="balance" id="balance"     placeholder="balance..">
+        <input type="text" name="createdBy" id="createdBy" style="display:none" value="admin">
+        <input type="text" name="level" id="level" style="display:none" value="user">
+        
+        <button onclick="addUser()">Submit</button>
+
+
+
+        <script>
+           addUser = () => {
+
+            let username = document.getElementById('username').value;
+            let password = document.getElementById('password').value;
+            let level = document.getElementById('level').value;
+            let createdBy = document.getElementById('createdBy').value;
+            let balance = document.getElementById('balance').value;
+            let tempData = {
+                username : username,
+                password : password,
+                level : level,
+                createdBy : createdBy,
+                balance : balance
+
+            };
+            $.ajax({
+            type:'post',
+            url:'../api/registerUser',
+            data:JSON.stringify(tempData),
+            contentType: "application/json; charset=utf-8",
+            success:function(data){
+                    console.log(data);
+            }
+        });
+
+        
+        
+        
+        
+        
+    }
+        </script>
+
+</body>
+</html>
