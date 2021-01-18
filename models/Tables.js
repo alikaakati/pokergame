@@ -5,10 +5,11 @@ const Schema = mongoose.Schema;
 
 const tableSchema = new Schema({
     Name : String,
+    TableType : String,
     MaxCapacity : Number,
     MinStake : Number,
     Rake : Number,
-    PlayersInTable : { type : Array , "default" : []}
+    
 });
 
 const Table =  mongoose.model('Table',tableSchema);

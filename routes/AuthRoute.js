@@ -10,6 +10,5 @@ router.post('/registerSuperAgent',authModerator,authController.registerSuperAgen
 router.post('/registerAgent',authSuperAgent,authController.registerAgent);
 router.post('/registerUserByAgent',authAgent,authController.registerUserByAgent);
 router.post('/login',authController.login);
-
-
+router.post('/userLogin',authController.userLogin);
 module.exports = router;

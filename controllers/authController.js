@@ -34,6 +34,7 @@ login = (req,res) =>{
         if(!user) res.json({error : "No user found"})
         else{
 
+
             bcrypt.compare(req.body.password , user.password,(err , result) =>{
                 if(err || result == false) res.json({error : "Passwords dont match !"})
                 else{
@@ -164,9 +165,39 @@ registerUserByAgent = async(req,res) =>{
 }
 
 
+
+
+userLogin = async(req , res) =>{
+    let filter = {username : req.body.username}
+    let username = req.body.username;
+    let password = req.body.password;
+    let loginDate = req.body.loginDate;
+
+
+    Account.findOne(filter,(err , user)=>{
+        if(!user) res.json({error : "No user found"})
+        else{
+
+
+            bcrypt.compare(req.body.password , user.password,async(err , result) =>{
+                if(err || result == false) return res.json({error : "Passwords dont match !"})
+                else{
+                    let token = username + '' + password + '' +loginDate;
+                    let tokenHash = await bcrypt.hash(token , 10);
+                    user.token = tokenHash;
+                    await user.save();
+                    return res.json({success : tokenHash});
+                }
+            })
+        }
+    })
+}
+
+
 module.exports = {
     login,
     registerAgent,
     registerSuperAgent,
-    registerUserByAgent
+    registerUserByAgent,
+    userLogin
 }

@@ -12,6 +12,7 @@ const account = new Schema({
     rake : Number,
     phone : String,
     isSuspended : Boolean,
+    token : String,
     time : { type : Date, default: Date.now }
 });
 

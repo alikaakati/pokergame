@@ -8,4 +8,5 @@ router.post('/depositUSDFundsToSuperAgent',authModerator,moderatorController.dep
 router.post('/depositLBPFundsToSuperAgent',authModerator,moderatorController.depositLBPFundsToSuperAgent)
 router.post('/withdrawLBPFundsFromSuperAgent',authModerator,moderatorController.withdrawLBPFundsFromSuperAgent)
 router.post('/withdrawUSDFundsFromSuperAgent',authModerator,moderatorController.withdrawUSDFundsFromSuperAgent)
+
 module.exports = router;
