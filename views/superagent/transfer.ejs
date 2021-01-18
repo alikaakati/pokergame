@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <%- include('links'); -%>
-    <link rel="stylesheet" href="/css/moderator/transfer.css">
+    <link rel="stylesheet" href="/css/superagent/transfer.css">
 </head>
 <body>
     
@@ -14,7 +14,7 @@
 
             <div class="mainContainer">
 
-                <div class="mainContainerDiv">
+                <div class="mainContainerDiv" id="mainContainerDiv">
                     
                     <div class="firstRow">
                         <div class="firstRowLeft">
@@ -152,8 +152,23 @@
             
         }
     </script>
+<script>
+    openSideBar = () =>{
+        let width = document.getElementById('mainSideBar').style.width;
+        if(width){
+            document.getElementById('mainSideBar').style.width = '';
+            document.getElementById('openSideBar').style.left = '5px';
+            document.getElementById('mainContainerDiv').style.display = 'block';
+        } 
+        else{
+            document.getElementById('mainSideBar').style.width = '90%';
+            document.getElementById('openSideBar').style.left = '91%';
+            document.getElementById('mainContainerDiv').style.display = 'none';
 
-
+            
+        } 
+    }
+</script>
 <script>
     depositUSD = () =>{
 

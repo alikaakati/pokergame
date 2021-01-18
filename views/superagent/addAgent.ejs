@@ -13,8 +13,8 @@
         
         <%- include('sidebar'); -%>
 
-            <div class="mainContainer">
-                <div class="mainContainerDiv">
+            <div class="mainContainer" id='mainContainer'>
+                <div class="mainContainerDiv" id="mainContainerDiv">
                 <h5 id='errormsg'></h5>
                 <div class="row">
                     <label for="username">Username</label>
@@ -158,6 +158,23 @@
                 
             }
         </script>
+<script>
+    openSideBar = () =>{
+        let width = document.getElementById('mainSideBar').style.width;
+        if(width){
+            document.getElementById('mainSideBar').style.width = '';
+            document.getElementById('openSideBar').style.left = '5px';
+            document.getElementById('mainContainerDiv').style.display = 'block';
+        } 
+        else{
+            document.getElementById('mainSideBar').style.width = '90%';
+            document.getElementById('openSideBar').style.left = '91%';
+            document.getElementById('mainContainerDiv').style.display = 'none';
+
+            
+        } 
+    }
+</script>
 
 
 

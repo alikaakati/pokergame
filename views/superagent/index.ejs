@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="stylesheet" href="/css/superagent/index.css">
     <%- include('links'); -%>
+    <link rel="stylesheet" href="/css/superagent/index.css">
 </head>
 <body>
     
@@ -11,52 +11,6 @@
 
     <div class="fullContainer">
         <%- include('sidebar'); -%>
-            <div class="mainContainer">
-
-                <div class="mainContainerFirstRow">
-                    <div class="cards">
-                        <div class="cardLeftElement" style="background-color: blanchedalmond;">
-                            <img class="logo" src="/images/money-icon.png" alt="My_Logo" id='money-icon' >
-                        </div>
-                        <div class="cardRightElement">
-
-                            <p class="firstp">
-                                Balance
-                            </p>
-                            <p class="secondp">
-                                420$
-                            </p>
-
-                        </div>
-                    </div>
-                    <div class="cards">
-                        <div class="cardLeftElement">
-                            <img class="logo" src="/images/profile-icon.png" alt="My_Logo" >
-                        </div>
-                        <div class="cardRightElement">
-
-                            <p class="firstp">
-                                Players
-                            </p>
-                            <p class="secondp">
-                                3
-                            </p>
-
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="mainContainerRest">
-
-
-
-
-    
-
-
-                </div>
-            </div>
     </div>
 
 
@@ -89,8 +43,26 @@
             "bInfo": false
         });
         
-    })
+    });
 
+
+</script>
+<script>
+    openSideBar = () =>{
+        let width = document.getElementById('mainSideBar').style.width;
+        if(width){
+            document.getElementById('mainSideBar').style.width = '';
+            document.getElementById('openSideBar').style.left = '5px';
+            
+        } 
+        else{
+            document.getElementById('mainSideBar').style.width = '90%';
+            document.getElementById('openSideBar').style.left = '91%';
+            
+
+            
+        } 
+    }
 </script>
 
 

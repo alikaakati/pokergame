@@ -14,7 +14,7 @@
         <%- include('sidebar'); -%>
 
             <div class="mainContainer">
-                <div class="mainContainerDiv">
+                <div class="mainContainerDiv" id="mainContainerDiv">
                     <div class="div">
                         <% if(transactions.length > 0){ %>
                     <table id="table_id"  class="display compact cell-border hover" >
@@ -107,8 +107,23 @@
 
 </script>
 
+<script>
+    openSideBar = () =>{
+        let width = document.getElementById('mainSideBar').style.width;
+        if(width){
+            document.getElementById('mainSideBar').style.width = '';
+            document.getElementById('openSideBar').style.left = '5px';
+            document.getElementById('mainContainerDiv').style.display = 'block';
+        } 
+        else{
+            document.getElementById('mainContainerDiv').style.display = 'none';
+            document.getElementById('mainSideBar').style.width = '90%';
+            document.getElementById('openSideBar').style.left = '91%';
 
-
+            
+        } 
+    }
+</script>
 
 
 </body>

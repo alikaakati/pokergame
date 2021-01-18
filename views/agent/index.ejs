@@ -35,6 +35,24 @@
             
         }
     </script>
+<script>
+    openSideBar = () =>{
+        let width = document.getElementById('mainSideBar').style.width;
+        if(width){
+            document.getElementById('mainSideBar').style.width = '';
+            document.getElementById('openSideBar').style.left = '5px';
+            
+        } 
+        else{
+            document.getElementById('mainSideBar').style.width = '90%';
+            document.getElementById('openSideBar').style.left = '91%';
+            
+
+            
+        } 
+    }
+</script>
+
 
 </body>
 </html>

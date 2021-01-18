@@ -12,7 +12,14 @@ module.exports = (app) => {
     
         res.render('./moderator/index.ejs',{username : req.session.username,superagents,agents,players,allUsers})
     });
+    app.get('/moderator/index',authModerator,async(req,res) =>{
+        let superagents = await Account.countDocuments({level : 'superagent'}) || 0;
+        let agents = await Account.countDocuments({ level : 'agent' }) || 0;
+        let players = await Account.countDocuments({ level : 'player'}) || 0;
+        let allUsers = superagents + agents + players;
     
+        res.render('./moderator/index.ejs',{username : req.session.username,superagents,agents,players,allUsers})
+    });
     app.get('/moderator/transfer',authModerator,async(req,res) =>{
         const accounts = await Account.find({username : {$ne : req.session.username}});
         const fundsUSD = await Account.findById(req.session.userID).select("fundsUSD");

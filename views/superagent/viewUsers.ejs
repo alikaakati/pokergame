@@ -12,7 +12,7 @@
         <%- include('sidebar'); -%>
             <div class="mainContainer">
 
-                <div class="mainContainerDiv">
+                <div class="mainContainerDiv" id="mainContainerDiv">
                     <div class="div">
                         <% if(users.length > 0){ %>
                         <table id="table_id" class="display  hover" >
@@ -146,7 +146,23 @@ $(document).ready(function(){
 })
 
 </script>
+<script>
+    openSideBar = () =>{
+        let width = document.getElementById('mainSideBar').style.width;
+        if(width){
+            document.getElementById('mainSideBar').style.width = '';
+            document.getElementById('openSideBar').style.left = '5px';
+            document.getElementById('mainContainerDiv').style.display = 'block';
+        } 
+        else{
+            document.getElementById('mainSideBar').style.width = '90%';
+            document.getElementById('openSideBar').style.left = '91%';
+            document.getElementById('mainContainerDiv').style.display = 'none';
 
+            
+        } 
+    }
+</script>
 </body>
 </html> 
 
