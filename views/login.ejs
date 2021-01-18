@@ -70,7 +70,7 @@
                 data:JSON.stringify(tempData),
                 contentType: "application/json; charset=utf-8",
                 success:function(data){
-                    if(data.level == 'superagent') window.location.replace('./superAgent/index');
+                    if(data.level == 'superagent') window.location.href = './superAgent/index';
                     else if(data.level == 'moderator') window.location.href = './moderator/index';
                     else if(data.level == 'agent') window.location.href = './agent/index';
                     else{
@@ -96,13 +96,6 @@
 
         }
 
-    </script>
-    <script src="/socket.io/socket.io.js"></script>
-
-    <script>
-    const socket = io('http://localhost:9000');
-    socket.on('message',(message) => console.log(message));
-    
     </script>
 
 </body>

@@ -6,7 +6,7 @@ const authModerator = auth.authModerator;
 module.exports = (app) => {
 
     app.get('/',(req , res) =>{
-        res.render('./user/socketTest.ejs');
+        res.render('./login.ejs');
     });
 
     app.get('/login',(req , res) =>{
