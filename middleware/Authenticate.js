@@ -16,8 +16,14 @@ authenticateModerator = (req,res,next) =>{
     else res.json({msg : "error" + req.session})
 }
 
+authenticateUser = (req , res , next) =>{
+    if(req.body.hash) next()
+    else res.json({error : 'error'});
+}
+
 module.exports = {
     authenticateAgent,
     authenticateSuperAgent,
-    authenticateModerator
+    authenticateModerator,
+    authenticateUser
 };

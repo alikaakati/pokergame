@@ -194,10 +194,25 @@ userLogin = async(req , res) =>{
 }
 
 
+userGetTables = async(req , res) =>{
+
+    let tableType = req.body.tableType;
+    let tableCurrency = req.body.tableCurrency;
+    let filter = { tableType : tableType , tableCurrency : tableCurrency};
+    await Table.find(filter , (err , doc) =>{
+        if(err) return res.json({error : 'error'});
+        else return res.json({doc : doc});
+    })
+}
+
+
+
+
 module.exports = {
     login,
     registerAgent,
     registerSuperAgent,
     registerUserByAgent,
-    userLogin
+    userLogin,
+    userGetTables
 }
