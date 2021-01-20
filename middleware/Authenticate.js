@@ -1,3 +1,7 @@
+
+const Account = require("../models/Account");
+
+
 authenticateAgent = (req,res,next) =>{
 
     if(req.session.username && req.session.isLoggedIn && req.session.level == 'agent') next()
@@ -17,8 +21,11 @@ authenticateModerator = (req,res,next) =>{
 }
 
 authenticateUser = (req , res , next) =>{
-    if(req.body.hash) next()
-    else res.json({error : 'error'});
+    let filter = {username : username , token : token};
+    Account.find(filter , (err , doc) =>{
+        if(err) return res.json({error : 'error'});
+        else next();
+    })
 }
 
 module.exports = {

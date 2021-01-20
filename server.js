@@ -103,6 +103,22 @@ const AuthRoute = require('./routes/AuthRoute');
 const ModeratorRoute = require('./routes/ModeratorRoute');
 const SuperAgentRoute = require('./routes/SuperAgentRoutes');
 const AgentRoute = require('./routes/AgentRoutes');
+const Table = require("./models/Tables");
+const table1 = new Table({
+  Name : 'table1',
+  TableType : "Texas Hold'em",
+  TableCurrency : "USD",
+  MaxCapacity : 8
+});
+const table2 = new Table({
+  Name : 'table2',
+  TableType : "Omaha",
+  TableCurrency : "LBP",
+  MaxCapacity : 9
+});
+table1.save();
+table2.save();
+
 app.use('/api',AuthRoute);
 app.use('/moderator',ModeratorRoute);
 app.use('/superagent',SuperAgentRoute);
