@@ -201,7 +201,10 @@ userGetTables = async(req , res) =>{
     let filter = { tableType : tableType , tableCurrency : tableCurrency};
     await Table.find(filter , (err , doc) =>{
         if(err) return res.json({error : 'error'});
-        else return res.json({doc : doc});
+        else{
+            return res.json({doc});
+            
+        }
     })
 }
 

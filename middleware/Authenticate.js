@@ -23,8 +23,8 @@ authenticateModerator = (req,res,next) =>{
 authenticateUser = (req , res , next) =>{
     let filter = {username : req.body.username , token : req.body.token};
     Account.find(filter , (err , doc) =>{
-        if(err) return res.json({error : 'error'});
-        else next();
+        if(doc) next();
+        else res.json({error : 'error'});
     })
 }
 
