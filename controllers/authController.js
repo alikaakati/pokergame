@@ -121,6 +121,19 @@ registerSuperAgent = async(req,res) =>{
         }
     })
 }
+
+
+checkIfLoggedIn = async(req,res) =>{
+
+    let filter = {username : req.body.username , token : req.body.token};
+    Account.findOne(filter , (err , doc) =>{
+        if(doc) return res.json({success : 'success'});
+        else{
+            return res.json({error : 'error'});
+        }
+    });
+
+}
 registerUserByAgent = async(req,res) =>{
 
     Account.findOne({username : req.body.username} , (err , result) =>{
@@ -203,7 +216,7 @@ userGetTables = async(req , res) =>{
         if(err) return res.json({error : 'error'});
         else{
             return res.json({doc});
-            
+
         }
     })
 }
@@ -217,5 +230,6 @@ module.exports = {
     registerSuperAgent,
     registerUserByAgent,
     userLogin,
+    checkIfLoggedIn,
     userGetTables
 }

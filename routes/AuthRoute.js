@@ -13,4 +13,5 @@ router.post('/registerUserByAgent',authAgent,authController.registerUserByAgent)
 router.post('/login',authController.login);
 router.post('/userLogin',authController.userLogin);
 router.post('/userGetTables',authUser,authController.userGetTables);
+router.post('/checkIfLoggedIn',authUser,authController.checkIfLoggedIn);
 module.exports = router;
