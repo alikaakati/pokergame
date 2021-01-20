@@ -171,7 +171,7 @@ userLogin = async(req , res) =>{
     let filter = {username : req.body.username}
     let username = req.body.username;
     let password = req.body.password;
-    let loginDate = req.body.loginDate;
+    let loginDate = new Date().toLocaleString();
 
 
     Account.findOne(filter,(err , user)=>{
