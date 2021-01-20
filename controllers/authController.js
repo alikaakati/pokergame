@@ -175,12 +175,12 @@ userLogin = async(req , res) =>{
 
 
     Account.findOne(filter,(err , user)=>{
-        if(!user) res.json({error : "No user found"})
+        if(!user) res.json({error : "Invalid username or password"})
         else{
 
 
             bcrypt.compare(req.body.password , user.password,async(err , result) =>{
-                if(err || result == false) return res.json({error : "Passwords dont match !"})
+                if(err || result == false) return res.json({error : "Invalid username or password !"})
                 else{
                     let token = username + '' + password + '' +loginDate;
                     let tokenHash = await bcrypt.hash(token , 10);
