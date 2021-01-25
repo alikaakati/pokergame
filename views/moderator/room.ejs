@@ -26,6 +26,7 @@
             if(username && room){
                 let joinRoom = {username , room};
                 socket.emit('joinRoom' , joinRoom);
+                socket.emit('joinRoom','test','test');
                 console.log('joined room');
             }
             
