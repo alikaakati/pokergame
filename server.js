@@ -14,70 +14,91 @@ const io = require("socket.io")({
 });
 
 
-// let suits = ['h','c','s','d'];
-// let ranks = ['A','2','3','4','5','6','7','8','9','T','J','Q','K'];
-// let cards = [];
+let suits = ['h','c','s','d'];
+let ranks = ['A','2','3','4','5','6','7','8','9','T','J','Q','K'];
+let cards = [];
 
-// suits.forEach(suit => {
-//   ranks.forEach((rank) =>{
-//     let card = `${rank}${suit}`;
-//     cards.push(card);
-//   })
-// });
-// shuffle = (array) => {
-//   var currentIndex = array.length, temporaryValue, randomIndex;
+suits.forEach(suit => {
+  ranks.forEach((rank) =>{
+    let card = `${rank}${suit}`;
+    cards.push(card);
+  })
+});
+shuffle = (array) => {
+  var currentIndex = array.length, temporaryValue, randomIndex;
 
-//   // While there remain elements to shuffle...
-//   while (0 !== currentIndex) {
+  // While there remain elements to shuffle...
+  while (0 !== currentIndex) {
 
-//     // Pick a remaining element...
-//     randomIndex = Math.floor(Math.random() * currentIndex);
-//     currentIndex -= 1;
+    // Pick a remaining element...
+    randomIndex = Math.floor(Math.random() * currentIndex);
+    currentIndex -= 1;
 
-//     // And swap it with the current element.
-//     temporaryValue = array[currentIndex];
-//     array[currentIndex] = array[randomIndex];
-//     array[randomIndex] = temporaryValue;
-//   }
+    // And swap it with the current element.
+    temporaryValue = array[currentIndex];
+    array[currentIndex] = array[randomIndex];
+    array[randomIndex] = temporaryValue;
+  }
 
-//   return array;
-// }
-// cards = shuffle(cards);
-// let hand1 = [];
-// let hand2 = [];
-// let hand3 = [];
-// let hand4 = [];
-// let hand5 =[];
-// let hand6 = [];
-// let hand7 = [];
-// let hand8 = [];
-// let hand9 = [];
+  return array;
+}
+cards = shuffle(cards);
+let hand1 = [];
+let hand2 = [];
+let hand3 = [];
+let hand4 = [];
+let hand5 =[];
+let hand6 = [];
+let hand7 = [];
+let hand8 = [];
+let hand9 = [];
 
-// for(let i = 0 ; i < 7 ; i++){
-//   hand1.push(cards.splice(i, 1)[0]);
-//   hand2.push(cards.splice(i , 1)[0]);
-//   hand3.push(cards.splice(i  , 1)[0]);
-//   hand4.push(cards.splice(i  , 1)[0]);
-//   hand5.push(cards.splice(i  , 1)[0]);
-//   hand6.push(cards.splice(i  , 1)[0]);
-//   hand7.push(cards.splice(i , 1)[0]);
-//   hand8.push(cards.splice(i , 1)[0]);
-//   hand9.push(cards.splice(i , 1)[0]);
-  
-  
-// };
+for(let i = 0 ; i < 5 ; i++){
+  hand1.push(cards[i]);
+  hand2.push(cards[i]);
+  hand3.push(cards[i]);
+  hand4.push(cards[i]);
+  hand5.push(cards[i]);
+  hand6.push(cards[i]);
+  hand7.push(cards[i]);
+  hand8.push(cards[i]);
+  hand9.push(cards[i]);
+  cards.splice(i , 1)[0]
+};
+for(let i = 0 ; i < 5 ; i++){
+  hand1.push(cards.splice(i , 1)[0]);
+  hand2.push(cards.splice(i , 1)[0]);
+  hand4.push(cards.splice(i , 1)[0]);
+  hand5.push(cards.splice(i , 1)[0]);
+  hand6.push(cards.splice(i , 1)[0]);
+  hand7.push(cards.splice(i , 1)[0]);
+  hand8.push(cards.splice(i , 1)[0]);
+  hand9.push(cards.splice(i , 1)[0]);
+};
+console.log("cards before solving");
+console.log(hand1.toString());
+console.log(hand2.toString());
 
-// hand1 = handSolver.solve(hand1);
-// hand2 = handSolver.solve(hand2);
-// hand3 = handSolver.solve(hand3);
-// hand4 = handSolver.solve(hand4);
-// hand5 = handSolver.solve(hand5);
-// hand6 = handSolver.solve(hand6);
+hand1 = handSolver.solve(hand1);
+hand2 = handSolver.solve(hand2);
+hand3 = handSolver.solve(hand3);
+hand4 = handSolver.solve(hand4);
+hand5 = handSolver.solve(hand5);
+hand6 = handSolver.solve(hand6);
+hand7 = handSolver.solve(hand7);
+hand8 = handSolver.solve(hand8);
+hand9 = handSolver.solve(hand9);
+console.log("cards after solving");
 
-// let winner = handSolver.winners([hand1 , hand2 , hand3 ]);
-// console.log(winner.toString());
+console.log(hand1.toString());
+console.log(hand2.toString());
 
-// return;
+let winner = handSolver.winners([hand1 , hand2 , hand3, hand4 ,hand5 ,hand6 , hand7 , hand8 ,hand9 ]);
+console.log("winner");
+
+console.log(winner.toString());
+
+return;
 io.listen(server);
 
 
@@ -93,12 +114,11 @@ let players = {};
 io.on('connection',(socket) => {
   console.log('A user connected');
 
-  socket.on('joinRoom',( username , room ) =>{
+  socket.on('joinRoom',({username , room} , socketID) =>{
     socket.join(room);
-    
+    socket.broadcast.to(room).emit('roomMessage' , `${username} joined ` + room);
     let player = {room : room , socketID : socket.id};
     players[username] = player;
-    io.in(room).emit('message', 'cool game');
     console.log(players);
     
   });
