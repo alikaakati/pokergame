@@ -95,7 +95,7 @@ io.on('connection',(socket) => {
 
   socket.on('joinRoom',( username , room ) =>{
     socket.join(room);
-    socket.broadcast.to(room).emit('roomMessage' , `${username} joined ` + room);
+    
     let player = {room : room , socketID : socket.id};
     players[username] = player;
     io.in(room).emit('message', 'cool game');
