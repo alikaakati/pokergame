@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text" name="username" id="username">
+    <input type="text" name="room" id="room">
+    
+    <button onclick='joinRoom()'>Submit</button>
+    
+    <p id='messages'></p>
+    <script src="/socket.io/socket.io.js"></script>
+
+    <script>
+        const socket = io('http://localhost');
+        socket.on('message',(msg) =>{
+            document.getElementById('messages').innerHTML += `<br> ${msg}`
+        });
+        joinRoom = () =>{
+            let username = document.getElementById('username').value;
+            let room = document.getElementById('room').value;
+            if(username && room){
+                let joinRoom = {username , room};
+                socket.emit('joinRoom' , joinRoom);
+                console.log('joined room');
+            }
+            
+        }
+    </script>
+</body>
+</html>

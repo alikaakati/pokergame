@@ -54,7 +54,7 @@ shuffle = (array) => {
   return array;
 }
 
-
+let players = {};
 
 io.on('connection',(socket) => {
   console.log('A user connected');
@@ -63,6 +63,14 @@ io.on('connection',(socket) => {
       console.log('game created');
       let newHand = new Hands();
       newHand.save();  
+  });
+  socket.on('joinRoom',({username , room} , socketID) =>{
+    socket.join(room);
+    socket.broadcast.to(room).emit('roomMessage' , `${username} joined ` + room);
+    let player = {room : room , socketID : socket.id};
+    players[username] = player;
+    console.log(players);
+    
   });
       socket.on('chat', (msg) => {
 
@@ -104,20 +112,6 @@ const ModeratorRoute = require('./routes/ModeratorRoute');
 const SuperAgentRoute = require('./routes/SuperAgentRoutes');
 const AgentRoute = require('./routes/AgentRoutes');
 const Table = require("./models/Tables");
-const table1 = new Table({
-  Name : 'table1',
-  TableType : "Texas Hold'em",
-  TableCurrency : "USD",
-  MaxCapacity : 8
-});
-const table2 = new Table({
-  Name : 'table2',
-  TableType : "Omaha",
-  TableCurrency : "LBP",
-  MaxCapacity : 9
-});
-table1.save();
-table2.save();
 
 app.use('/api',AuthRoute);
 app.use('/moderator',ModeratorRoute);
@@ -125,7 +119,7 @@ app.use('/superagent',SuperAgentRoute);
 app.use('/agent',AgentRoute);
 require('./routes/SuperAgentRender')(app);
 require('./routes/AgentRender')(app);
-
+require('./routes/ModeratorRender')(app);
 require('./routes/AuthRender')(app);
 
 
